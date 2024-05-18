@@ -21,8 +21,14 @@ const userSchema = new mongoose.Schema({
     enum: ['counselor', 'counselee'],
     required: true,
   },
-  counselorType:{
-    type:String
+  counselorType: {
+    type: String
+  },
+  phone: {
+    type: Number,
+    required: true,
+    minLength: 10,
+    maxLength: 10,
   },
   password: {
     type: String,
@@ -31,4 +37,4 @@ const userSchema = new mongoose.Schema({
   },
 })
 
-const User = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)
