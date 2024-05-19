@@ -17,6 +17,7 @@ async function RegisterController(req, res) {
 
     if (existingUser) {
       responseMessage(res, 400, "User already exists")
+      return
     }
 
     if (userType === 'counselee') {
@@ -51,6 +52,8 @@ async function RegisterController(req, res) {
 
   } catch (error) {
     console.log(error);
+    return responseMessage(res, 400, error.message)
+
   }
 }
 
