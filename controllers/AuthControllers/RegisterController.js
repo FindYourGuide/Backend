@@ -31,9 +31,9 @@ async function RegisterController(req, res) {
         password: hashedPassword,
       })
       await newUser.save()
-      responseMessage(res, 201, "User created successfully", newUser)
+      responseMessage(res, 201, "User registered successfully", newUser)
     }
-    else {
+    else if (userType === 'counselor') {
       const hashedPassword = await hashPassword(password)
       const newUser = new User({
         firstname: fname,
@@ -46,7 +46,17 @@ async function RegisterController(req, res) {
       })
 
       await newUser.save()
-      responseMessage(res, 201, "User created successfully", newUser)
+      responseMessage(res, 201, "User registered successfully", newUser)
+    }
+    else {
+      const hashedPassword = await hashPassword(password)
+      const newUser = User({
+        email: email,
+        userType: 'admin',
+        password: hashedPassword,
+      })
+      await newUser.save()
+      responseMessage(res, 201, "Admin created successfully", newUser)
     }
 
 
