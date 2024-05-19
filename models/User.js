@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema({
     required: true,
     minLength: 8
   },
+  isProfileCreated: {
+    type: Boolean,
+    default: false,
+  }
 })
 
 module.exports = mongoose.model('User', userSchema)

@@ -2,7 +2,7 @@ const express = require('express')
 const { PORT } = require('./config')
 const { connectDB } = require('./connections')
 const cors = require('cors')
-const { authRouter } = require('./routes')
+const { authRouter, profileRouter } = require('./routes')
 
 const app = express()
 
@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth', authRouter)
+app.use('/api/profile', profileRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
