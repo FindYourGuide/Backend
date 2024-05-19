@@ -7,7 +7,7 @@ async function RegisterController(req, res) {
       fname,
       lname,
       email,
-      user,
+      userType,
       counselortype,
       phone,
       password,
@@ -19,13 +19,13 @@ async function RegisterController(req, res) {
       responseMessage(res, 400, "User already exists")
     }
 
-    if (user == 'counselee') {
+    if (userType === 'counselee') {
       const hashedPassword = await hashPassword(password)
-      const newUser = user({
+      const newUser = User({
         firstname: fname,
         lastname: lname,
         email: email,
-        userType: user,
+        userType: userType,
         phone: parseInt(phone),
         password: hashedPassword,
       })
@@ -38,7 +38,7 @@ async function RegisterController(req, res) {
         firstname: fname,
         lastname: lname,
         email: email,
-        userType: user,
+        userType: userType,
         counselortype: counselortype,
         phone: parseInt(phone),
         password: hashedPassword,
