@@ -10,9 +10,9 @@ async function GetAppointmentsByDate(req, res) {
     const targetDate = new Date(date);
     targetDate.setHours(0, 0, 0, 0);
     const appointments = await Appointment.find({
-      counselorId:userId,
+      counselorId: userId,
       date: { $gte: targetDate, $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000) }
-    });
+    }).sort({ startTime: 1 });
 
     if (appointments) {
       return responseMessage(res, 200, "Appointments for counselor by date", appointments)
