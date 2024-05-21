@@ -31,8 +31,8 @@ const appointmentSchema = Schema({
   },
   status: {
     type: String,
-    enum: ['expire', 'active'],
-    default: 'active'
+    enum: ['expired', 'upcoming'],
+    default: 'upcoming'
   }
 })
 

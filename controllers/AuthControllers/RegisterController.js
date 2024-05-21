@@ -1,5 +1,6 @@
 const { User } = require('../../models')
 const { responseMessage, hashPassword } = require('../../helpers')
+const { PRIVATE_CODE } = require('../../config')
 async function RegisterController(req, res) {
   try {
     console.log(req.body);
@@ -11,6 +12,7 @@ async function RegisterController(req, res) {
       counselortype,
       phone,
       password,
+      privateCode
     } = req.body
 
     const existingUser = await User.findOne({ email: email })
@@ -49,14 +51,20 @@ async function RegisterController(req, res) {
       responseMessage(res, 201, "User registered successfully", newUser)
     }
     else {
-      const hashedPassword = await hashPassword(password)
-      const newUser = User({
-        email: email,
-        userType: 'admin',
-        password: hashedPassword,
-      })
-      await newUser.save()
-      responseMessage(res, 201, "Admin created successfully", newUser)
+      if (privateCode == PRIVATE_CODE) {
+        const hashedPassword = await hashPassword(password)
+        const newUser = User({
+          email: email,
+          userType: 'admin',
+          password: hashedPassword,
+        })
+        await newUser.save()
+        responseMessage(res, 201, "Admin created successfully", newUser)
+      }
+      else {
+        responseMessage(res, 400, "Invalid private code")
+        return;
+      }
     }
 
 

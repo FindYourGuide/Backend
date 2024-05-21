@@ -4,6 +4,8 @@ const { GetCounselorDetails, GetUserDetails } = require('./GetterControllers/Get
 const { GetAppointmentsByDate } = require('./AppointmentsControllers/GetAppointmentsController')
 const CheckSlotAvailibility = require('./AppointmentsControllers/CheckSlotAvailibility')
 const AddAppointment = require('./AppointmentsControllers/AddAppointment')
+const DeleteAppointment = require('./AppointmentsControllers/DeleteAppointment')
+const EditAppointment = require('./AppointmentsControllers/EditAppointment')
 
 module.exports = {
   RegisterController,
@@ -12,5 +14,7 @@ module.exports = {
   GetUserDetails,
   GetAppointmentsByDate,
   CheckSlotAvailibility,
-  AddAppointment
+  AddAppointment,
+  DeleteAppointment,
+  EditAppointment
 }

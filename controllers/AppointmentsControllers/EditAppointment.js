@@ -2,20 +2,27 @@ const { User, Appointment } = require('../../models')
 
 const { responseMessage } = require('../../helpers')
 
-async function CheckSlotAvailibility(req, res) {
+async function EditAppointment(req, res) {
+  const { startTime, endTime, date } = req.body;
   const counselorId = req.user._id
-  const { date, startTime, endTime } = req.body;
-
+  const appointmentId = req.params.id;
   try {
-    console.log(startTime);
+    const appointment = await Appointment.findById({ _id: appointmentId });
+    console.log(appointment, counselorId);
+    if (!appointment) {
+      return responseMessage(res, 404, 'Appointment not found')
+    }
+    if (appointment.counselorId.toString() !== counselorId.toString()) {
+      return responseMessage(res, 401, 'Unauthorized')
+    }
 
     const targetDate = new Date(date);
     targetDate.setHours(0, 0, 0, 0);
 
-    // Query appointments for the given counselorId and date
     const overlappingAppointments = await Appointment.find({
       counselorId,
       date: { $gte: targetDate, $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000) },
+      _id: { $ne: appointmentId },
       $or: [
         { startTime: { $lt: endTime }, endTime: { $gt: startTime } }, // General overlap condition
         { startTime: { $eq: startTime } }, // Starts exactly at the specified start time
@@ -25,17 +32,18 @@ async function CheckSlotAvailibility(req, res) {
       ]
     });
 
-
-    // If there are overlapping appointments, the slot is not available
     if (overlappingAppointments.length > 0) {
-      responseMessage(res, 200, 'Slot is not available', { available: false });
+      return responseMessage(res, 401, 'Slot is not available');
     } else {
-      responseMessage(res, 200, 'Slot Available', { available: true });
+      const updatedAppointment = await Appointment.findByIdAndUpdate({ _id: appointmentId }, { $set: { startTime, endTime } }, { new: true });
+      return responseMessage(res, 200, 'Appointment updated successfully', updatedAppointment)
     }
-  } catch (error) {
-    console.error('Error checking slot availability:', error);
-    responseMessage(res, 500, 'An error occurred while checking slot availability');
-  }
-};
 
-module.exports = CheckSlotAvailibility
+
+  } catch (error) {
+    console.log(error);
+    return responseMessage(res, 500, 'Internal server error')
+  }
+}
+
+module.exports = EditAppointment;
