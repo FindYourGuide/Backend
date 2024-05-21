@@ -1,4 +1,4 @@
-const { User } = require('../../models')
+const { User, Counselor } = require('../../models')
 const { responseMessage, hashPassword } = require('../../helpers')
 const { PRIVATE_CODE } = require('../../config')
 async function RegisterController(req, res) {
@@ -42,12 +42,18 @@ async function RegisterController(req, res) {
         lastname: lname,
         email: email,
         userType: userType,
-        counselortype: counselortype,
+        counselorType: counselortype,
         phone: parseInt(phone),
         password: hashedPassword,
       })
 
       await newUser.save()
+
+      const newProfile = new Counselor({
+        counselorId: newUser._id,
+      })
+
+      await newProfile.save()
       responseMessage(res, 201, "User registered successfully", newUser)
     }
     else {

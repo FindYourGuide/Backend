@@ -9,17 +9,17 @@ const counselorSchema = Schema({
   },
   description: {
     type: String,
-    required: true
+    default: 'No description updated yet'
   },
   workExp: {
     type: Number,
-    required: true,
     default: 0,
     min: 0,
     max: 50
   },
   address: {
     type: String,
+    default: ''
   },
   rating: {
     type: Number,
