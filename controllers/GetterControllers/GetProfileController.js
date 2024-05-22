@@ -28,16 +28,19 @@ async function GetUserDetails(req, res) {
   try {
     const user = await User.findById({ _id: userId })
     const data = {
-      userId: user._id,
+      _id: user._id,
       firstname: user.firstname,
       lastname: user.lastname,
-      userType: user.userType
+      userType: user.userType,
+      email: user.email,
+      phone: user.phone
     }
-    return responseMessage(res, 200, 'Details of counselor', user)
+    return responseMessage(res, 200, 'Details of counselor', data)
   } catch (error) {
     return responseMessage(res, 500, 'Unable to get details of counselor')
   }
 }
+
 
 
 module.exports = {
