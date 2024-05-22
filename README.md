@@ -50,20 +50,24 @@ Start the server
   npm run dev
 ```
 
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`VITE_BACKEND_URL`
+`PORT`
 
-#### To run locally, the value of this variable will be
+`MONGO_URL`
+
+`JWT_SECRET`
+
+`PRIVATE_CODE`
+
+#### To run locally, the value of these variable will be
 
 ```javascript
-VITE_BACKEND_URL=http://localhost:8080
+PORT=8080
+MONGO_URL="mongodb://localhost:27017/Appointment"
+JWT_SECRET=Your secret code
+PRIVATE_CODE=Your code for admin registration
 ```
-#### To run after deployment, the value of this variable will be
-
-```javascript
-VITE_BACKEND_URL=Hosted link
-```
-
