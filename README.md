@@ -51,6 +51,23 @@ Start the server
 ```
 
 
+## Dependencies
+
+```javascript
+"dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0",
+    "node-cron": "^3.0.3",
+    "nodemon": "^3.1.0",
+    "validator": "^13.12.0"
+  }
+```
+
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
