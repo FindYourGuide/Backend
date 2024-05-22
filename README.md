@@ -143,4 +143,10 @@ function verifyToken(token) {
 used to create and verify jwt token
 
 
+## Api Documentation
+
+[Api Documentation](https://documenter.getpostman.com/view/28469978/2sA3QnjExp)
+
+
+
 
