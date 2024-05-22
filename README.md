@@ -29,13 +29,13 @@ FindYourGuide is a web or mobile application that simplifies appointment schedul
 Clone the project
 
 ```bash
-  git clone https://github.com/FindYourGuide/Frontend.git
+  git clone https://github.com/FindYourGuide/Backend.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Frontend
+  cd Backend
 ```
 
 Install dependencies
