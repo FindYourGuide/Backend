@@ -140,5 +140,7 @@ function verifyToken(token) {
 
 ```
 
+used to create and verify jwt token
+
 
 
