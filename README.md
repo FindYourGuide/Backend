@@ -109,19 +109,19 @@ module.exports = AuthMiddleware;
 
 The function retrieves the authorization token from the request header named auth-token.
 
-## 2. Token Validation:
+### 2. Token Validation:
 
 If a token exists, the verifyToken function (assumed to be a helper function) attempts to decode the token using a secret key. This validation ensures the token's integrity and authenticity.
 
-## 3. User Retrieval:
+### 3. User Retrieval:
 
 If the token is valid, the decoded payload (containing the user's ID) is used to fetch the corresponding user data from the User model using Mongoose's findById method.
 
-## 4. User Verification:
+### 4. User Verification:
 
 If a user is found with the ID from the decoded token, it indicates a valid and authorized user.
 
-## 5. Authorization:
+### 5. Authorization:
 
 If the token is invalid or the user is not found, the middleware sends an error response with a 401 (Unauthorized) status code.
 If the token is valid and the user is found, the next() function is called, allowing the request to proceed to the intended route or controller.
@@ -143,7 +143,7 @@ function verifyToken(token) {
 used to create and verify jwt token
 
 
-## Api Documentation
+# Api Documentation
 
 [Api Documentation](https://documenter.getpostman.com/view/28469978/2sA3QnjExp)
 
